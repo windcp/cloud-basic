@@ -1,0 +1,51 @@
+server:
+  port: 8060
+
+spring:
+  application:
+    name: service-openfeign
+
+  cloud:
+    nacos:
+      discovery:
+        namespace: public
+        server-addr: 101.43.86.27:8848
+        username: nacos
+        password: nacos
+      config:
+        server-addr: 101.43.86.27:8848
+        file-extension: yaml  #后缀名
+        group: dev-group      #分组
+        namespace: a7a4cfb0-b813-42ae-9527-0ced9847474e  #命名空间的id
+
+feign:
+  client:
+    config:
+      default:  #默认全局 fileName 可自定义配置 如service-stock
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+        #        errorDecoder: com.example.SimpleErrorDecoder
+        #        retryer: com.example.SimpleRetryer
+        requestInterceptors:
+          - com.wind.serviceopenfeign.intercepter.GlobalFeignIntercepter
+#          - com.example.BarRequestInterceptor
+#        decode404: false
+#        encoder: com.example.SimpleEncoder
+#        decoder: com.example.SimpleDecoder
+#        contract: com.example.SimpleContract
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

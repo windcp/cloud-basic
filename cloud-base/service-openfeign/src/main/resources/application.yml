@@ -1,46 +1,54 @@
-server:
-  port: 8060
-
 spring:
-  application:
-    name: service-openfeign
+  profiles:
+    active: dev   #激活的环境
 
-  cloud:
-    nacos:
-      discovery:
-        namespace: public
-        server-addr: 101.43.86.27:8848
-        username: nacos
-        password: nacos
+#user:
+#  config:
+#    local: hhaha
 
-feign:
-  client:
-    config:
-      default:  #默认全局 fileName 可自定义配置 如service-stock
-        connectTimeout: 5000
-        readTimeout: 5000
-        loggerLevel: full
-#        errorDecoder: com.example.SimpleErrorDecoder
-#        retryer: com.example.SimpleRetryer
-        requestInterceptors:
-          - com.wind.serviceopenfeign.intercepter.GlobalFeignIntercepter
-#          - com.example.BarRequestInterceptor
-#        decode404: false
-#        encoder: com.example.SimpleEncoder
-#        decoder: com.example.SimpleDecoder
-#        contract: com.example.SimpleContract
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#server:
+#  port: 8060
+#
+#spring:
+#  application:
+#    name: service-openfeign
+#
+#  cloud:
+#    nacos:
+#      discovery:
+#        namespace: public
+#        server-addr: 101.43.86.27:8848
+#        username: nacos
+#        password: nacos
+#
+#feign:
+#  client:
+#    config:
+#      default:  #默认全局 fileName 可自定义配置 如service-stock
+#        connectTimeout: 5000
+#        readTimeout: 5000
+#        loggerLevel: full
+##        errorDecoder: com.example.SimpleErrorDecoder
+##        retryer: com.example.SimpleRetryer
+#        requestInterceptors:
+#          - com.wind.serviceopenfeign.intercepter.GlobalFeignIntercepter
+##          - com.example.BarRequestInterceptor
+##        decode404: false
+##        encoder: com.example.SimpleEncoder
+##        decoder: com.example.SimpleDecoder
+##        contract: com.example.SimpleContract
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
