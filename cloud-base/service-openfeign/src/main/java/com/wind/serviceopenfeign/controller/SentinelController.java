@@ -30,7 +30,7 @@ public class SentinelController {
     @Autowired
     private StockOpenFeignService stockOpenFeignService;
 
-    private static final String ORDER_RESOURCE_NAME = "order";
+    private static final String ORDER_RESOURCE_NAME = "service-stock";
 
     /**
      * 使用@SentinelResource进行Sentinel流控
@@ -48,7 +48,7 @@ public class SentinelController {
      * @return
      */
     @GetMapping ("/subOrder")
-    @SentinelResource(value = ORDER_RESOURCE_NAME,blockHandler = "blockHandlerForUserTest",fallback = "fallbackForUserTest")
+    //@SentinelResource(value = ORDER_RESOURCE_NAME,blockHandler = "blockHandlerForUserTest",fallback = "fallbackForUserTest")
     public String subStock(@RequestParam(name = "s")String s){
         System.out.println("订单新增成功");
         //调用库存扣减
@@ -56,35 +56,35 @@ public class SentinelController {
         return "订单服务-订单新增成功:" + result;
     }
 
-    /**
-     * userTest流控降级后的处理方法
-     * 注意：
-     * 1、一定要是public
-     * 2、返回值一定要和源方法（userTest）保证一致，包含源方法的参数
-     * 3、可以在参数最后添加BlockException，可以区分是什么规则的处理方法
-     * @param id
-     * @param ex
-     * @return
-     */
-    public String blockHandlerForUserTest(String id, BlockException ex){
-        ex.printStackTrace();
-        return "服务降级："+ ex.getMessage();
-    }
-
-    /**
-     * userTest异常后的处理方法
-     * 注意：
-     * 1、一定要是public
-     * 2、返回值一定要和源方法（userTest）保证一致，包含源方法的参数
-     * 3、可以在参数最后添加Throwable，可以区分是什么异常
-     * @param id
-     * @param e
-     * @return
-     */
-    public String fallbackForUserTest(String id,Throwable e){
-        e.printStackTrace();
-        return  "服务异常处理" + e.getMessage();
-    }
+//    /**
+//     * userTest流控降级后的处理方法
+//     * 注意：
+//     * 1、一定要是public
+//     * 2、返回值一定要和源方法（userTest）保证一致，包含源方法的参数
+//     * 3、可以在参数最后添加BlockException，可以区分是什么规则的处理方法
+//     * @param id
+//     * @param ex
+//     * @return
+//     */
+//    public String blockHandlerForUserTest(String id, BlockException ex){
+//        ex.printStackTrace();
+//        return "服务降级："+ ex.getMessage();
+//    }
+//
+//    /**
+//     * userTest异常后的处理方法
+//     * 注意：
+//     * 1、一定要是public
+//     * 2、返回值一定要和源方法（userTest）保证一致，包含源方法的参数
+//     * 3、可以在参数最后添加Throwable，可以区分是什么异常
+//     * @param id
+//     * @param e
+//     * @return
+//     */
+//    public String fallbackForUserTest(String id,Throwable e){
+//        e.printStackTrace();
+//        return  "服务异常处理" + e.getMessage();
+//    }
 
     /**
      * 定义规则

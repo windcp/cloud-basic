@@ -19,6 +19,8 @@ spring:
         namespace: public  #命名空间的id
 
 feign:
+  sentinel:
+    enabled: true
   client:
     config:
       default:  #默认全局 fileName 可自定义配置 如service-stock

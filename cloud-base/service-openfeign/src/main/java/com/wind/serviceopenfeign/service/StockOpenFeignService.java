@@ -1,6 +1,7 @@
 package com.wind.serviceopenfeign.service;
 
 import com.wind.serviceopenfeign.model.vo.GroupVo;
+import com.wind.serviceopenfeign.service.sentinel.StockOpenFeignServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date: 2022/10/13/16:18
  * @Description:
  */
-@FeignClient(name = "service-stock",path = "stock")
+@FeignClient(name = "service-stock",path = "stock" ,fallback = StockOpenFeignServiceFallback.class)
 public interface StockOpenFeignService {
 
     //声明需要调用的rest接口对应的方法
