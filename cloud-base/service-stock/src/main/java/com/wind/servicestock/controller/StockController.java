@@ -48,7 +48,7 @@ public class StockController {
      * 库存扣减
      * @return
      */
-    @RequestMapping("/subStock")
+    @GetMapping("/subStock")
     public String subStock(){
         System.out.println("库存扣减成功");
 

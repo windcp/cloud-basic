@@ -19,7 +19,7 @@ public interface StockOpenFeignService {
      * 库存扣减
      * @return
      */
-    @RequestMapping("/subStock")
+    @GetMapping("/subStock")
     String subStock();
 
     /**

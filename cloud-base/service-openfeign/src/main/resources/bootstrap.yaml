@@ -16,7 +16,7 @@ spring:
         server-addr: 101.43.86.27:8848
         file-extension: yaml  #后缀名
         group: dev-group      #分组
-        namespace: a7a4cfb0-b813-42ae-9527-0ced9847474e  #命名空间的id
+        namespace: public  #命名空间的id
 
 feign:
   client:
