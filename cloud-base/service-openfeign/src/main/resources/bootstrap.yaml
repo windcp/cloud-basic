@@ -1,9 +1,12 @@
 server:
   port: 8060
+#  servlet:
+#    context-path: /service-openfeign
 
 spring:
   application:
     name: service-openfeign
+
 
   cloud:
     nacos:
