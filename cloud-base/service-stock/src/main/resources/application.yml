@@ -4,7 +4,8 @@ spring:
 
   cloud:
     inetutils:
-      preferredNetworks:
+#      ignored-interfaces: eth.*
+      preferred-networks:
         - 192.168
         - 10.0
     nacos:
