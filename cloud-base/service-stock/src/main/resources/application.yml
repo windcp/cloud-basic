@@ -3,6 +3,10 @@ spring:
     name: service-stock
 
   cloud:
+    inetutils:
+      preferredNetworks:
+        - 192.168
+        - 10.0
     nacos:
       discovery:
         namespace: public
