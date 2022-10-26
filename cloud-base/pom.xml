@@ -11,11 +11,12 @@
     <packaging>pom</packaging>
 
     <modules>
-<!--        <module>service-product</module>-->
+        <module>service-product</module>
 <!--        <module>service-order</module>-->
         <module>service-openfeign</module>
         <module>service-gateway</module>
         <module>service-stock</module>
+        <module>service-rabbitmq</module>
     </modules>
 
     <properties>
@@ -28,6 +29,8 @@
         <spring.cloud.alibaba>2021.1</spring.cloud.alibaba>
         <!-- Spring Cloud 版本 -->
         <spring.cloud>2020.0.1</spring.cloud>
+        <!-- apache commons包 -->
+        <apache.commons>4.3</apache.commons>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -50,6 +53,25 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+
+<!--        &lt;!&ndash; 配置注释处理器 @ConfigurationProperties &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${apache.commons}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <!-- SpringBoot测试类依赖 -->

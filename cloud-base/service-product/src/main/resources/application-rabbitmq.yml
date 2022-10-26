@@ -1,0 +1,22 @@
+spring:
+  rabbitmq:
+    host: 192.168.228.128
+    port: 5672
+    username: admin
+    password: admin
+    #虚拟host 可以不设置,使用server默认host
+    virtual-host: /
+
+    # 动态创建和绑定队列、交换机的配置
+    modules:
+      # 延时队列，到了过期的时间会被转发到订单死信队列
+      - routing-key: log.inbound.operation.queue.key
+        queue:
+          name: log.inbound.operation.queue
+          #          dead-letter-exchange: order.exchange
+          #          dead-letter-routing-key: order.close.routing.key
+          arguments:
+            # 1分钟(测试)，单位毫秒
+            x-message-ttl: 60000
+        exchange:
+          name: log.exchange
