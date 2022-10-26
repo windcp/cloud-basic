@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cloud-base/cloud-base.iml" filepath="$PROJECT_DIR$/cloud-base/cloud-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-base/common/common.iml" filepath="$PROJECT_DIR$/cloud-base/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-base/service-gateway/service-gateway.iml" filepath="$PROJECT_DIR$/cloud-base/service-gateway/service-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-base/service-openfeign/service-openfeign.iml" filepath="$PROJECT_DIR$/cloud-base/service-openfeign/service-openfeign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-base/service-product/service-product.iml" filepath="$PROJECT_DIR$/cloud-base/service-product/service-product.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-base/service-rabbitmq/service-rabbitmq.iml" filepath="$PROJECT_DIR$/cloud-base/service-rabbitmq/service-rabbitmq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-base/service-stock/service-stock.iml" filepath="$PROJECT_DIR$/cloud-base/service-stock/service-stock.iml" />
+    </modules>
+  </component>
+</project>
