@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @Author: v_vwlkunli
  * @Date: 2022/10/26/14:18
- * @Description:
+ * @Description: 消息发送配置
  */
 @Configuration
 public class RabbitmqConfig {
