@@ -17,7 +17,6 @@
         <module>service-gateway</module>
         <module>service-stock</module>
         <module>service-rabbitmq</module>
-        <module>common</module>
     </modules>
 
     <properties>

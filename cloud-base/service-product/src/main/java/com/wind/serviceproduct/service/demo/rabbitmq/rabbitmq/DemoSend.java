@@ -1,4 +1,4 @@
-package com.wind.serviceproduct.service.rabbitmq;
+package com.wind.serviceproduct.service.demo.rabbitmq.rabbitmq;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,4 +8,6 @@ package com.wind.serviceproduct.service.rabbitmq;
  * @Description:
  */
 public interface DemoSend {
+
+    String sendTest(String message);
 }

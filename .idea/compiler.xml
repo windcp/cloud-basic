@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,14 +10,12 @@
         <module name="service-openfeign" />
         <module name="service-stock" />
         <module name="service-gateway" />
-        <module name="common" />
-        <module name="service-product" />
         <module name="service-rabbitmq" />
+        <module name="service-product" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cloud-base" target="8" />
-      <module name="common" target="8" />
       <module name="service-gateway" target="8" />
       <module name="service-openfeign" target="8" />
       <module name="service-order" target="8" />
@@ -24,5 +23,10 @@
       <module name="service-rabbitmq" target="8" />
       <module name="service-stock" target="8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="service-gateway" options="" />
+    </option>
   </component>
 </project>

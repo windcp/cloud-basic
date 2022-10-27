@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/cloud-base/cloud-base.iml" filepath="$PROJECT_DIR$/cloud-base/cloud-base.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cloud-base/common/common.iml" filepath="$PROJECT_DIR$/cloud-base/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cloud-basic.iml" filepath="$PROJECT_DIR$/.idea/cloud-basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-base/service-gateway/service-gateway.iml" filepath="$PROJECT_DIR$/cloud-base/service-gateway/service-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-base/service-openfeign/service-openfeign.iml" filepath="$PROJECT_DIR$/cloud-base/service-openfeign/service-openfeign.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-base/service-product/service-product.iml" filepath="$PROJECT_DIR$/cloud-base/service-product/service-product.iml" />
