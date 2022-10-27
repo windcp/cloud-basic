@@ -1,9 +1,9 @@
-package com.wind.serviceproduct.service.demo.rabbitmq.rabbitmq.impl;
+package com.wind.serviceproduct.service.demo.rabbitmq.product.impl;
 
 import com.wind.rabbitmq.service.RabbitSendService;
+import com.wind.serviceproduct.service.demo.rabbitmq.product.DemoSend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.wind.serviceproduct.service.demo.rabbitmq.rabbitmq.DemoSend;
 
 /**
  * Created with IntelliJ IDEA.

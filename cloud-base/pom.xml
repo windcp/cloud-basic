@@ -32,6 +32,8 @@
         <!-- apache commons包 -->
         <apache.commons>4.3</apache.commons>
 
+        <alibaba.fastjson>1.2.79</alibaba.fastjson>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -56,12 +58,12 @@
         </dependency>
 
 
-<!--        &lt;!&ndash; 配置注释处理器 @ConfigurationProperties &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
+        <!-- 配置注释处理器 @ConfigurationProperties -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -72,6 +74,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba.fastjson}</version>
         </dependency>
 
         <!-- SpringBoot测试类依赖 -->

@@ -4,6 +4,9 @@ package com.wind.rabbitmq.config;
 import com.wind.rabbitmq.beans.RabbitModuleInitializer;
 import com.wind.rabbitmq.model.vo.RabbitModuleProperties;
 import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,12 +36,20 @@ public class RabbitmqConfig {
 //    @Value("${spring.rabbitmq.password}")
 //    private String password;
 
-    /**
-     * 使用json序列化机制，进行消息转换
-     */
+
     @Bean
-    public MessageConverter jackson2MessageConverter() {
-        return new Jackson2JsonMessageConverter();
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        template.setMessageConverter(new Jackson2JsonMessageConverter());
+        return template;
+    }
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        return factory;
     }
 
     /**

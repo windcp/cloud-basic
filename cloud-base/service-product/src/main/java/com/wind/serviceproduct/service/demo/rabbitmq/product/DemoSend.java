@@ -1,4 +1,4 @@
-package com.wind.serviceproduct.service.demo.rabbitmq.rabbitmq;
+package com.wind.serviceproduct.service.demo.rabbitmq.product;
 
 /**
  * Created with IntelliJ IDEA.

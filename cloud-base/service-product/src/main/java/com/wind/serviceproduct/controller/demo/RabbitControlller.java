@@ -1,6 +1,6 @@
 package com.wind.serviceproduct.controller.demo;
 
-import com.wind.serviceproduct.service.demo.rabbitmq.rabbitmq.DemoSend;
+import com.wind.serviceproduct.service.demo.rabbitmq.product.DemoSend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
