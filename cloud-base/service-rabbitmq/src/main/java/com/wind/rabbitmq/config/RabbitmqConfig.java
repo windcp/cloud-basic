@@ -3,9 +3,15 @@ package com.wind.rabbitmq.config;
 
 import com.wind.rabbitmq.beans.RabbitModuleInitializer;
 import com.wind.rabbitmq.model.vo.RabbitModuleProperties;
+import com.wind.rabbitmq.service.RabbitSendService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.ReturnedMessage;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -36,12 +42,36 @@ public class RabbitmqConfig {
 //    @Value("${spring.rabbitmq.password}")
 //    private String password;
 
+    private static Logger logger = LoggerFactory.getLogger(RabbitmqConfig.class);
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        RabbitTemplate template = new RabbitTemplate(connectionFactory);
-        template.setMessageConverter(new Jackson2JsonMessageConverter());
-        return template;
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+
+        //设置开启Mandatory,才能触发回调函数,无论消息推送结果怎么样都强制调用回调函数
+        rabbitTemplate.setMandatory(true);
+
+        //消息被交换机接收会被触发
+        rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
+            @Override
+            public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+                System.out.println("ConfirmCallback:     "+"相关数据："+correlationData);
+                System.out.println("ConfirmCallback:     "+"确认情况："+ack);
+                System.out.println("ConfirmCallback:     "+"原因："+cause);
+            }
+        });
+
+        //消息未路由到队列触发
+        rabbitTemplate.setReturnsCallback(new RabbitTemplate.ReturnsCallback() {
+            @Override
+            public void returnedMessage(ReturnedMessage returnedMessage) {
+                logger.info("ReturnedMessage {}",returnedMessage);
+            }
+        });
+
+
+        return rabbitTemplate;
     }
 
     @Bean
