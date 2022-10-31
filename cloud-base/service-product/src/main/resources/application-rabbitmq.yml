@@ -11,6 +11,9 @@ spring:
     publisher-confirm-type: correlated
     #确认消息已发送到队列(Queue)
     publisher-returns: true
+#    listener:
+#      simple:
+#        batch-size: 10
 
     # 动态创建和绑定队列、交换机的配置
     modules:
@@ -38,3 +41,15 @@ spring:
             # 1分钟(测试)，单位毫秒
             x-message-ttl: 60000
         routing-key: demo.test
+
+      - exchange:
+          name: demo.batch
+          type: DIRECT
+        queue:
+          name: batch.test
+          #          dead-letter-exchange: order.exchange
+          #          dead-letter-routing-key: order.close.routing.key
+          arguments:
+            # 1分钟(测试)，单位毫秒
+            x-message-ttl: 60000
+        routing-key: batch.test

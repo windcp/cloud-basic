@@ -1,4 +1,4 @@
-package com.wind.rabbitmq.service;
+package com.wind.rabbitmq.repo;
 
 import com.wind.rabbitmq.model.dto.MessageDto;
 import com.wind.rabbitmq.utils.DESUtil;
@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
@@ -20,10 +21,10 @@ import java.util.concurrent.TimeoutException;
  * @Date: 2022/10/26/14:31
  * @Description:
  */
-@Service
-public class RabbitSendService {
+@Repository
+public class RabbitSendRepo {
 
-    private static Logger logger = LoggerFactory.getLogger(RabbitSendService.class);
+    private static Logger logger = LoggerFactory.getLogger(RabbitSendRepo.class);
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -40,6 +41,7 @@ public class RabbitSendService {
         CorrelationData cd1 = new CorrelationData();
         cd1.setId(messageId);
         rabbitTemplate.convertAndSend(exchangeName,bingKey,messageDto,cd1);
+
         try {
             if(cd1.getFuture().get(10, TimeUnit.SECONDS).isAck()){
                 logger.info("消息成功投递");

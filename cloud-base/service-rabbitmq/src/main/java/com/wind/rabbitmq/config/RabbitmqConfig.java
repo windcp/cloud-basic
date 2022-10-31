@@ -3,22 +3,24 @@ package com.wind.rabbitmq.config;
 
 import com.wind.rabbitmq.beans.RabbitModuleInitializer;
 import com.wind.rabbitmq.model.vo.RabbitModuleProperties;
-import com.wind.rabbitmq.service.RabbitSendService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.ReturnedMessage;
+import org.springframework.amqp.rabbit.batch.BatchingStrategy;
+import org.springframework.amqp.rabbit.batch.SimpleBatchingStrategy;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.BatchingRabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,17 +32,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitmqConfig {
 
-//    @Value("${spring.rabbitmq.host}")
-//    private String host;
-//
-//    @Value("${spring.rabbitmq.port}")
-//    private int port;
-//
-//    @Value("${spring.rabbitmq.username}")
-//    private String username;
-//
-//    @Value("${spring.rabbitmq.password}")
-//    private String password;
 
     private static Logger logger = LoggerFactory.getLogger(RabbitmqConfig.class);
 
@@ -72,6 +63,34 @@ public class RabbitmqConfig {
 
 
         return rabbitTemplate;
+    }
+
+    @Bean("batchQueueTaskScheduler")
+    public TaskScheduler batchQueueTaskScheduler(){
+        TaskScheduler taskScheduler=new ThreadPoolTaskScheduler();
+        return taskScheduler;
+    }
+
+    @Bean
+    public BatchingRabbitTemplate batchingRabbitTemplate(ConnectionFactory connectionFactory, @Qualifier("batchQueueTaskScheduler") TaskScheduler taskScheduler){
+        //一次批量的数量
+        int batchSize=10;
+        // 缓存大小限制,单位字节，
+        // simpleBatchingStrategy的策略，是判断message数量是否超过batchSize限制或者message的大小是否超过缓存限制，
+        // 缓存限制，主要用于限制"组装后的一条消息的大小"
+        // 如果主要通过数量来做批量("打包"成一条消息), 缓存设置大点
+        // 详细逻辑请看simpleBatchingStrategy#addToBatch()
+        int bufferLimit=1024; //1 K
+        long timeout=3000;
+
+        //注意，该策略只支持一个exchange/routingKey
+        //A simple batching strategy that supports only one exchange/routingKey
+        BatchingStrategy batchingStrategy=new SimpleBatchingStrategy(batchSize,bufferLimit,timeout);
+        BatchingRabbitTemplate batchingRabbitTemplate =new BatchingRabbitTemplate(connectionFactory,batchingStrategy,taskScheduler);
+        batchingRabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+
+
+        return batchingRabbitTemplate;
     }
 
     @Bean

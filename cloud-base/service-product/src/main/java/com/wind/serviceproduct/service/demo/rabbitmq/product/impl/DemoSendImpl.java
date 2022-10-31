@@ -1,6 +1,6 @@
 package com.wind.serviceproduct.service.demo.rabbitmq.product.impl;
 
-import com.wind.rabbitmq.service.RabbitSendService;
+import com.wind.rabbitmq.repo.RabbitSendRepo;
 import com.wind.serviceproduct.service.demo.rabbitmq.product.DemoSend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class DemoSendImpl implements DemoSend {
 
     @Autowired
-    private RabbitSendService rabbitSendService;
+    private RabbitSendRepo rabbitSendService;
 
 
     @Override
