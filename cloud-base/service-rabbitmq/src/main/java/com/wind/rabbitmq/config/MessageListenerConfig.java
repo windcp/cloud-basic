@@ -36,6 +36,7 @@ public class MessageListenerConfig {
 //        factory.setConcurrentConsumers(3);
 //        factory.setMaxConcurrentConsumers(10);
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
+//        factory.setTaskExecutor();
         factory.setContainerCustomizer(container -> {
              simpleMessageListenerContainer(container);
         });

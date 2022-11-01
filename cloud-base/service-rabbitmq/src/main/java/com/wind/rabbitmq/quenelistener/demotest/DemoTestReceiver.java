@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.listener.ListenerContainerIdleEvent;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -40,8 +42,18 @@ public class DemoTestReceiver {
     }
 
 
+    /**
+     * 单个消费
+     * @param messageDto
+     * @param headers
+     * @param queue
+     * @param deliveryTag
+     * @param channel
+     * @throws IOException
+     */
     @RabbitHandler
     @RabbitListener(queues = "demo.test"
+            ,id="someId"
             , containerFactory="myRabbitListenerContainerFactory"
             //, replyContentType = "application/json" //回复消息的消息体类型
             //, converterWinsContentType = "false" //设置向下兼容 使SimpleMessageConverter 设置有效不会被 replyContentType 覆盖
@@ -60,6 +72,12 @@ public class DemoTestReceiver {
         });
     }
 
+    /**
+     * 批量消费
+     * @param messageDtoList
+     * @param channel
+     * @throws IOException
+     */
     @RabbitHandler
     @RabbitListener(queues = "batch.test"
             , containerFactory="myRabbitListenerContainerFactory")
@@ -76,6 +94,14 @@ public class DemoTestReceiver {
     }
 
 
+    /**
+     * 事件监听
+     * @param event
+     */
+    @EventListener(condition = "event.listenerId == 'someId'")
+    public void onApplicationEvent(ListenerContainerIdleEvent event) {
+        logger.info("事件监听 event {}",event);
+    }
 
 
 }

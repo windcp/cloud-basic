@@ -40,6 +40,7 @@ public class RabbitSendRepo {
         //异步确认是否消息被接收
         CorrelationData cd1 = new CorrelationData();
         cd1.setId(messageId);
+        //如有必要可以使用messagePostProcessor 添加ttl 等属性
         rabbitTemplate.convertAndSend(exchangeName,bingKey,messageDto,cd1);
 
         try {
