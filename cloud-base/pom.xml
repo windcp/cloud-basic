@@ -17,6 +17,7 @@
         <module>service-gateway</module>
         <module>service-stock</module>
         <module>service-rabbitmq</module>
+        <module>service-kafka</module>
     </modules>
 
     <properties>

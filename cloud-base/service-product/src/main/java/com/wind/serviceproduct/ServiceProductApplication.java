@@ -3,7 +3,8 @@ package com.wind.serviceproduct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"com.wind.rabbitmq","com.wind.serviceproduct"})
+@SpringBootApplication(scanBasePackages =
+        {"com.wind.rabbitmq","com.wind.serviceproduct","com.wind.kafka"})
 public class ServiceProductApplication {
 
     public static void main(String[] args) {

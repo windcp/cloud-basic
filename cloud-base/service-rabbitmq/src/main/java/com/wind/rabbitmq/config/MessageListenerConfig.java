@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.support.RetryTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,6 +42,9 @@ public class MessageListenerConfig {
              simpleMessageListenerContainer(container);
         });
 
+        //事务
+        //factory.setTransactionManager();
+
         //factory.setConsumerTagStrategy(consumerTagStrategy());
         factory.setBatchListener(true); // configures a BatchMessageListenerAdapter
         //factory.setBatchSize(2); 未生效
@@ -58,6 +62,7 @@ public class MessageListenerConfig {
 
 
         //factory.setRetryTemplate(retryTemplate);
+
 //        factory.setReplyRecoveryCallback(ctx -> {
 //            Message failed = SendRetryContextAccessor.getMessage(ctx);
 //            Address replyTo = SendRetryContextAccessor.getAddress(ctx);
@@ -95,6 +100,7 @@ public class MessageListenerConfig {
 
         //异常处理器 ErrorHandler 接口实现
         //container.setErrorHandler();
+
 
 
         return container;

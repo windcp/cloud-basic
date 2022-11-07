@@ -10,6 +10,7 @@
         <module name="service-openfeign" />
         <module name="service-stock" />
         <module name="service-gateway" />
+        <module name="service-kafka" />
         <module name="service-rabbitmq" />
         <module name="service-product" />
       </profile>
@@ -17,6 +18,7 @@
     <bytecodeTargetLevel>
       <module name="cloud-base" target="8" />
       <module name="service-gateway" target="8" />
+      <module name="service-kafka" target="8" />
       <module name="service-openfeign" target="8" />
       <module name="service-order" target="8" />
       <module name="service-product" target="8" />
