@@ -20,6 +20,8 @@ public class DemoSendKafkaImpl implements DemoSendKafka {
 
     @Override
     public void send(String message) {
-        demoKafkaSend.sendInTransaction(message);
+        demoKafkaSend.demoSendCallback(message);
     }
+
+
 }

@@ -57,4 +57,18 @@ public class RabbitSendRepo {
         return messageDto.getMessageId();
     }
 
+
+    @Deprecated
+    public String sendTransction(String exchangeName, String bingKey, Object obj){
+        rabbitTemplate.setChannelTransacted(true);
+        MessageDto messageDto = new MessageDto();
+        messageDto.setData(obj);
+        String messageId = DESUtil.generateRandomKey(8);
+        messageDto.setMessageId(messageId);
+        messageDto.setCreateTime(System.currentTimeMillis());
+        //如有必要可以使用messagePostProcessor 添加ttl 等属性
+        rabbitTemplate.convertAndSend(exchangeName,bingKey,messageDto);
+        throw new RuntimeException("事务异常测试");
+        //return messageDto.getMessageId();
+    }
 }

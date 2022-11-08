@@ -44,6 +44,7 @@ public class KafkaTopicInitializer implements SmartInitializingSingleton {
         List<KafkaTopicBo> topicBos = kafkaModuleProperties.getTopics();
         topicBos.forEach(topicBo ->{
             genericApplicationContext.registerBean(topicBo.getName(),NewTopic.class,topicBo.getName(),topicBo.getNumPartitions(),topicBo.getReplicationFactor());
+            //KafkaAdminClient 这个也可以创建topic，可以研究下
         });
     }
 }

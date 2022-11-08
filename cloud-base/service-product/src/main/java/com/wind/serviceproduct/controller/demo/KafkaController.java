@@ -1,5 +1,6 @@
 package com.wind.serviceproduct.controller.demo;
 
+import com.wind.kafka.repo.DemoKafkaBatchSend;
 import com.wind.serviceproduct.service.demo.kafka.product.DemoSendKafka;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +23,19 @@ public class KafkaController {
     @Autowired
     private DemoSendKafka demoSendKafka;
 
+    @Autowired
+    private DemoKafkaBatchSend demoKafkaBatchSend;
+
     @PostMapping("/sendTest")
     public String sendTest(@RequestBody String message){
          demoSendKafka.send(message);
          return "true";
+    }
+
+    @PostMapping("/sendBatchTest")
+    public String sendBatchTest(@RequestBody String message){
+        demoKafkaBatchSend.demoBatchSend(message);
+        return "true";
     }
 
 }
