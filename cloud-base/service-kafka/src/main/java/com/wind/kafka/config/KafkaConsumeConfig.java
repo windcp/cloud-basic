@@ -73,6 +73,7 @@ public class KafkaConsumeConfig {
         factory.setConsumerFactory(consumerFactory);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         // 最大重试次数3次
+        //死刑队列 https://blog.csdn.net/qq_37362891/article/details/113656416
         factory.setErrorHandler(new SeekToCurrentErrorHandler(new DeadLetterPublishingRecoverer(kafkaTemplate), new BackOff() {
             @Override
             public BackOffExecution start() {
